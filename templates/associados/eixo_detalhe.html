@@ -1,0 +1,61 @@
+{% extends 'associados/base.html' %}
+{% block content %}
+
+<section class="section-dark">
+  <div class="container">
+
+    <!-- BREADCRUMB -->
+    <div class="breadcrumb">
+      <a href="{% url 'index' %}">Início</a> › {{ eixo.nome }}
+    </div>
+
+    <h2 class="section-heading">📘 {{ eixo.nome }}</h2>
+    <p class="section-sub">Artigos e autores disponíveis para esta matéria</p>
+
+    {% if artigos %}
+    <div class="artigo-list">
+      {% for artigo in artigos %}
+      <div class="artigo-card">
+
+        <!-- CABEÇALHO DO AUTOR (créditos) -->
+        <div class="artigo-autor-header">
+          <div class="author-avatar-sm">🎓</div>
+          <div>
+            <div class="artigo-autor-nome">{{ artigo.id_fk_autor.nome }}</div>
+            <div class="artigo-autor-email">
+              ✉️ {{ artigo.id_fk_autor.email }}
+            </div>
+          </div>
+          <div class="artigo-data">
+            📅 {{ artigo.data_publicacao|date:"d/m/Y" }}
+          </div>
+        </div>
+
+        <!-- CONTEÚDO DO ARTIGO -->
+        <div class="artigo-body">
+          {{ artigo.texto|safe }}
+        </div>
+
+        <!-- RODAPÉ DE CRÉDITOS -->
+        <div class="artigo-creditos">
+          <span>📌 Conteúdo de responsabilidade de</span>
+          <strong>{{ artigo.id_fk_autor.nome }}</strong>
+          <span>— todos os créditos ao autor original.</span>
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+
+    {% else %}
+    <div class="empty-state">
+      <div style="font-size:48px">📭</div>
+      <p>Nenhum artigo cadastrado para esta matéria ainda.</p>
+      <a href="{% url 'index' %}" class="btn-hero-secondary">← Voltar ao início</a>
+    </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% endblock %}

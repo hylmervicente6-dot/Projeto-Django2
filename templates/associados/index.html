@@ -1,0 +1,40 @@
+{% extends 'associados/base.html' %}
+{% block content %}
+
+<!-- HERO -->
+<section class="hero-section">
+  <div class="hero-badge">✨ Comunidade de Concursos Públicos</div>
+  <h1 class="hero-title">Estude com os melhores</h1>
+  <p class="hero-subtitle">
+    Conteúdo de Python, Django, IA, Redes e muito mais —
+    organizado por matéria, com materiais dos maiores cursos do Brasil.
+  </p>
+  <div class="hero-btns">
+    <a href="{% url 'artigo' %}" class="btn-hero-primary">📖 Ver Artigos</a>
+    <a href="{% url 'autores' %}" class="btn-hero-secondary">👥 Ver Autores</a>
+  </div>
+</section>
+
+<!-- MATÉRIAS -->
+<section class="section-dark">
+  <h2 class="section-heading">📚 Escolha uma Matéria</h2>
+  <p class="section-sub">Clique para ver os conteúdos e autores disponíveis</p>
+  <div class="container">
+    <div class="cards-grid">
+      {% for eixo in eixos %}
+      <a href="{% url 'eixo_detalhe' eixo.id %}" class="feature-card">
+        <div class="card-icon">📘</div>
+        <div class="card-title">{{ eixo.nome }}</div>
+        <div class="card-desc">
+          Veja os artigos e autores disponíveis para {{ eixo.nome }}.
+        </div>
+        <div class="card-link">Acessar matéria →</div>
+      </a>
+      {% empty %}
+      <p style="color:#8b949e">Nenhuma matéria cadastrada ainda.</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'associados/base.html' %}
+{% block content %}
+
+<section class="section-mid">
+  <div class="container">
+    <h2 class="section-heading">👩‍💻 Autores Cadastrados</h2>
+    <p class="section-sub">Plataformas e criadores de conteúdo parceiros</p>
+    <div class="cards-grid">
+      {% for autor in autores %}
+      <div class="author-card">
+        <div class="author-avatar">🎓</div>
+        <div class="author-name">{{ autor.nome }}</div>
+        <div class="author-email">✉️ {{ autor.email }}</div>
+        <div class="author-bio">{{ autor.biografia }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

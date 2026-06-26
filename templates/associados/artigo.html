@@ -1,0 +1,29 @@
+{% extends 'associados/base.html' %}
+{% block content %}
+
+<section class="section-dark">
+  <div class="container">
+    <h2 class="section-heading">📰 Todos os Artigos</h2>
+    <p class="section-sub">Conteúdo organizado por matéria e autor</p>
+    <div class="artigo-list">
+      {% for art in artigos %}
+      <div class="artigo-card">
+        <div class="artigo-autor-header">
+          <div class="author-avatar-sm">🎓</div>
+          <div>
+            <div class="artigo-autor-nome">{{ art.id_fk_autor.nome }}</div>
+            <div class="artigo-autor-email">{{ art.id_fk_eixo.nome }}</div>
+          </div>
+          <div class="artigo-data">{{ art.data_publicacao|date:"d/m/Y" }}</div>
+        </div>
+        <div class="artigo-body">{{ art.texto|safe }}</div>
+        <div class="artigo-creditos">
+          📌 Créditos: <strong>{{ art.id_fk_autor.nome }}</strong>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}
